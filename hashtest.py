@@ -1,5 +1,6 @@
 ###
-# Hash stuff.
+# Hashing and salting passwords in Python. 🐍
+# Written by ct 30/06/2024.
 ###
 
 import string, secrets, hashlib, os
