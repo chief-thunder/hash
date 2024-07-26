@@ -43,7 +43,7 @@ def hashnsalt(sstr: str,hstr: str,hname: str):
 ### Start of logic
 
 # Set password.
-password = "Thisisreallyg00d"
+password = "Thisisreallyg00d!"
 
 # Set dynamics of the salt.
 alphabet = string.ascii_letters + string.digits + string.punctuation
