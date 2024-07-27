@@ -1,10 +1,11 @@
 # Compiles the hash source code to an executable.
 
-main: hashtest.c
+main: hashtest-linux.c
 	BINDIR=bin
 	[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
 	echo "Compiling the code... ⏳"
-	gcc hashtest.c -o bin/hashtest
+	print: $(wildcard *.c)
+	gcc hashtest-linux.c -o bin/hashtest-linux
 
 clean:
-	rm -f bin/hashtest
+	rm -f bin/hashtest-linux
