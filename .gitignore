@@ -1,1 +1,5 @@
-.DS_Store
+# Ignore binary files.
+bin/
+
+# Ignore C object files.
+*.o
