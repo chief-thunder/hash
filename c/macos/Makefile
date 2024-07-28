@@ -4,7 +4,6 @@ main: hashtest-macos.c
 	BINDIR=bin
 	[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
 	echo "Compiling the code... ⏳"
-	print: $(wildcard *.c)
 	gcc hashtest-macos.c -o bin/hashtest-macos
 
 clean:

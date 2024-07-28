@@ -30,7 +30,7 @@ int main(void)
     int errSecSuccess = 0;
     getentropy(&salt, 1);
     printf("Result: %d", salt);
-
+/*
     short int bytes[10];
     int status = SecRandomCopyBytes(charset, (sizeof bytes)/(sizeof bytes[0]), &bytes);
         
@@ -42,7 +42,9 @@ int main(void)
     }
 
     printf("This is the random: %s", secretkey);
-
+*/
+    int bob = 0;
+    printf("bob: %ld\n", sizeof(bob));
     printf("Contents of charset: %s", charset);
     printf("Contents of password: %s", password);
     
