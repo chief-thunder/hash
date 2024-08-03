@@ -3,11 +3,12 @@
     A program that salts and hashes a password.
 */
 
+// Import needed libraries.
 import Foundation
 
+// Get random number.
 var bytes = [Int8](repeating: 0, count: 10)
 let status = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
-
 
 if status == errSecSuccess { // Always test the status.
     print(bytes)
