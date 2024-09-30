@@ -3,3 +3,6 @@ bin/
 
 # Ignore C object files.
 *.o
+
+# Ignore rust debug files.
+rust/target/debug
