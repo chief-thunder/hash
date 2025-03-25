@@ -53,29 +53,23 @@ int main(void)
     int errSecSuccess = 0;
     getentropy(&salt, 1);
     printf("Result: %d", salt);
-
+/*
     short int bytes[10];
-    int status = getentropy(bytes, sizeof(bytes));
-    int test = getentropy(charset, 10);
+    int status = SecRandomCopyBytes(charset, (sizeof bytes)/(sizeof bytes[0]), &bytes);
         
-    if (status == 0) { // Always test the status.
+    if (status == errSecSuccess) { // Always test the status.
         for (int i = 0; i < (sizeof bytes)/(sizeof bytes[0]); i++) {
-            printf("%d ", bytes[i]);
+            printf("%d", bytes[i]);
         }
-        printf("\n");
         // Prints something different every time you run.
-    } else {
-        printf("Failed to generate random bytes\n");
     }
 
-    printf("This is the random: %d\n", status);
-    printf("This is test: %d\n", test);
-    printf("Result: %d\n", salt);
-
+    printf("This is the random: %s", secretkey);
+*/
     int bob = 0;
     printf("bob: %ld\n", sizeof(bob));
-    printf("Contents of charset: %s\n", charset);
-    printf("Contents of password: %s\n", password);
+    printf("Contents of charset: %s", charset);
+    printf("Contents of password: %s", password);
     
     return 0;
 }
