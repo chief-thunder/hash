@@ -6,7 +6,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/random.h>
+//#include <sys/random.h>
+#include <Security/Security.h>
 
 // Create alphanumerical string with punctuation.
 char charset[] = "abcdefghijklmnopqrstuvwxyz"
@@ -17,13 +18,34 @@ char charset[] = "abcdefghijklmnopqrstuvwxyz"
 // Set password.
 char password[] = "Thisisreallyg00d!";
 
-// Create salt function.
-/*
-char getsalt(char saltstr[])
-{
-
+char choice(const char *charset, size_t length) {
+    uint8_t randomIndex;
+    int status = SecRandomCopyBytes(kSecRandomDefault, sizeof(randomIndex), &randomIndex);
+    if (status != errSecSuccess) {
+        fprintf(stderr, "Error generating random byte\n");
+        exit(EXIT_FAILURE);
+    }
+    return charset[randomIndex % length];
 }
-*/
+
+
+// Create salt function
+char getsalt(char saltstr[], size_t salt_length, const char *charset, size_t charset_length) {
+    for (size_t i = 0; i < salt_length; i++) {
+        saltstr[i] = choice(charset, charset_length);
+    }
+    saltstr[salt_length] = '\0'; // Null-terminate the salt string
+
+    // Return the value.
+    //return saltstr;
+}
+
+// Create salt function.
+//char getsalt(char saltstr[])
+//{
+
+//}
+
 
 int main(void)
 {
