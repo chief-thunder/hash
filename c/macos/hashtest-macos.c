@@ -1,6 +1,7 @@
 /*
     Hashing and salting passwords in C.
     Written by ct 30/06/2024.
+    Version 1.1
 */
 
 #include <stdio.h>
