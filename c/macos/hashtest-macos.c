@@ -1,13 +1,11 @@
 /*
     Hashing and salting passwords in C.
     Written by ct 30/06/2024.
-    Version 1.1
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-//#include <sys/random.h>
-#include <Security/Security.h>
+#include <sys/random.h>
 
 // Create alphanumerical string with punctuation.
 char charset[] = "abcdefghijklmnopqrstuvwxyz"
@@ -18,34 +16,13 @@ char charset[] = "abcdefghijklmnopqrstuvwxyz"
 // Set password.
 char password[] = "Thisisreallyg00d!";
 
-char choice(const char *charset, size_t length) {
-    uint8_t randomIndex;
-    int status = SecRandomCopyBytes(kSecRandomDefault, sizeof(randomIndex), &randomIndex);
-    if (status != errSecSuccess) {
-        fprintf(stderr, "Error generating random byte\n");
-        exit(EXIT_FAILURE);
-    }
-    return charset[randomIndex % length];
-}
-
-
-// Create salt function
-char getsalt(char saltstr[], size_t salt_length, const char *charset, size_t charset_length) {
-    for (size_t i = 0; i < salt_length; i++) {
-        saltstr[i] = choice(charset, charset_length);
-    }
-    saltstr[salt_length] = '\0'; // Null-terminate the salt string
-
-    // Return the value.
-    //return saltstr;
-}
-
 // Create salt function.
-//char getsalt(char saltstr[])
-//{
+/*
+char getsalt(char saltstr[])
+{
 
-//}
-
+}
+*/
 
 int main(void)
 {
@@ -53,23 +30,29 @@ int main(void)
     int errSecSuccess = 0;
     getentropy(&salt, 1);
     printf("Result: %d", salt);
-/*
+
     short int bytes[10];
-    int status = SecRandomCopyBytes(charset, (sizeof bytes)/(sizeof bytes[0]), &bytes);
+    int status = getentropy(bytes, sizeof(bytes));
+    int test = getentropy(charset, 10);
         
-    if (status == errSecSuccess) { // Always test the status.
+    if (status == 0) { // Always test the status.
         for (int i = 0; i < (sizeof bytes)/(sizeof bytes[0]); i++) {
-            printf("%d", bytes[i]);
+            printf("%d ", bytes[i]);
         }
+        printf("\n");
         // Prints something different every time you run.
+    } else {
+        printf("Failed to generate random bytes\n");
     }
 
-    printf("This is the random: %s", secretkey);
-*/
+    printf("This is the random: %d\n", status);
+    printf("This is test: %d\n", test);
+    printf("Result: %d\n", salt);
+
     int bob = 0;
     printf("bob: %ld\n", sizeof(bob));
-    printf("Contents of charset: %s", charset);
-    printf("Contents of password: %s", password);
+    printf("Contents of charset: %s\n", charset);
+    printf("Contents of password: %s\n", password);
     
     return 0;
 }
