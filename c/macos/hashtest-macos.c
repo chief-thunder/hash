@@ -48,29 +48,33 @@ char getsalt(char saltstr[], size_t salt_length, const char *charset, size_t cha
 
 int main(void)
 {
-    char salt[11] = 0;
-    //int errSecSuccess = 0;
-    //getentropy(&salt, 1);
-    getsalt(salt, 10, charset, sizeof(charset) - 1);
+    int salt = 0;
+    int errSecSuccess = 0;
+    getentropy(&salt, 1);
+    printf("Result: %d", salt);
 
-    printf("Result: %s\n", salt);
-/*
     short int bytes[10];
-    int status = SecRandomCopyBytes(charset, (sizeof bytes)/(sizeof bytes[0]), &bytes);
+    int status = getentropy(bytes, sizeof(bytes));
+    int test = getentropy(charset, 10);
         
-    if (status == errSecSuccess) { // Always test the status.
+    if (status == 0) { // Always test the status.
         for (int i = 0; i < (sizeof bytes)/(sizeof bytes[0]); i++) {
-            printf("%d", bytes[i]);
+            printf("%d ", bytes[i]);
         }
+        printf("\n");
         // Prints something different every time you run.
+    } else {
+        printf("Failed to generate random bytes\n");
     }
 
-    printf("This is the random: %s", secretkey);
-*/
+    printf("This is the random: %d\n", status);
+    printf("This is test: %d\n", test);
+    printf("Result: %d\n", salt);
+
     int bob = 0;
     printf("bob: %ld\n", sizeof(bob));
-    printf("Contents of charset: %s", charset);
-    printf("Contents of password: %s", password);
+    printf("Contents of charset: %s\n", charset);
+    printf("Contents of password: %s\n", password);
     
     return 0;
 }
