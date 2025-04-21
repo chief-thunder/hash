@@ -5,6 +5,16 @@
 
 # Import libraries.
 import string, secrets, hashlib, os
+from argon2 import PasswordHasher, Type
+
+ph = PasswordHasher(
+    time_cost=4,
+    memory_cost=65536,
+    parallelism=2,
+    hash_len=32,
+    salt_len=16,
+    type=Type.ID
+)
 
 # Clear the screen.
 os.system('clear')
@@ -62,3 +72,4 @@ print("MD5 Hash (unsalted): ", hashit(password, "md5"))
 print("MD5 Hash (salted): ", hashnsalt(salt, password, "md5"))
 print("SHA256 Hash (unsalted): ", hashit(password, "sha256"))
 print("SHA256 Hash (salted): ", hashnsalt(salt, password, "sha256"))
+print("Argon2id Hash (salted): ", ph.hash(password))
