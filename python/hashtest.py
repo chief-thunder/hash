@@ -1,8 +1,9 @@
 ###
 # Hashing and salting passwords in Python. 🐍
-# Written by ct 30/06/2024.
+# Written 30/06/2024 by ct.
 ###
 
+# Import libraries.
 import string, secrets, hashlib, os
 
 # Clear the screen.
@@ -11,6 +12,8 @@ os.system('clear')
 # Create salt function.
 def getsalt(mystr):
     while True:
+        # Generate a random salt.
+        # The salt must be 10 characters long, contain at least one lowercase and uppercase letter and a number.
         salt = ''.join(secrets.choice(mystr) for i in range(10))
         if (any(c.islower() for c in salt)
                 and any(c.isupper() for c in salt)
