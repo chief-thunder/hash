@@ -1,12 +1,14 @@
 ###
 # Hashing and salting passwords in Python. 🐍
 # Written 30/06/2024 by ct.
+# Version 1.0
 ###
 
 # Import libraries.
 import string, secrets, hashlib, os
 from argon2 import PasswordHasher, Type
 
+# Create a password hasher.
 ph = PasswordHasher(
     time_cost=4,
     memory_cost=65536,
@@ -41,6 +43,7 @@ def hashit(hstr: str,hname: str):
     # Return hash.
     return hash
 
+# Create hash and salt function.
 def hashnsalt(sstr: str,hstr: str,hname: str):
     # Salt the password.
     saltpassword = sstr + hstr
@@ -50,13 +53,20 @@ def hashnsalt(sstr: str,hstr: str,hname: str):
         hash = hashlib.md5(saltpassword.encode('utf-8')).hexdigest()
     elif hname.lower() == 'sha256':
         hash = hashlib.sha256(saltpassword.encode('utf-8')).hexdigest()
+    elif hname.lower() == 'argon2id':
+        hash = ph.hash(hstr) # Argon2id is salted by default.
+    else:
+        print("Hashing algorithm not supported. Please only use md5, sha256 or argon2id.")
+        return None
     # Return hash.
     return hash
 
-### Start of logic
+###
+# Start of logic
+###
 
-# Set password.
-password = "Thisisreallyg00d!"
+# Get password from user.
+password = input("Enter password: ")
 
 # Set dynamics of the salt.
 alphabet = string.ascii_letters + string.digits + string.punctuation
@@ -72,4 +82,5 @@ print("MD5 Hash (unsalted): ", hashit(password, "md5"))
 print("MD5 Hash (salted): ", hashnsalt(salt, password, "md5"))
 print("SHA256 Hash (unsalted): ", hashit(password, "sha256"))
 print("SHA256 Hash (salted): ", hashnsalt(salt, password, "sha256"))
-print("Argon2id Hash (salted): ", ph.hash(password))
+# Argon2id is salted by default and the salt length is specified in the PasswordHasher.
+print("Argon2id Hash (salted): ", hashnsalt("", password, "argon2id"))
