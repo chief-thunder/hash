@@ -95,8 +95,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-rust"
-version = "0.1.0"
+name = "hash-test"
+version = "0.1.1"
 dependencies = [
  "argon2",
  "md5",
